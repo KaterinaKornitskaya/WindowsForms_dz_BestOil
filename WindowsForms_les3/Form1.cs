@@ -13,10 +13,25 @@ namespace WindowsForms_les3
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
+            timer1.Start();
+
+            // в StatusStrip показываем день недели
+            toolStripStatusLabel2.Text = DateTime.Now.DayOfWeek.ToString();
+
+            // поля К оплате(кафе) и К оплате(всего) изначально равны 0
+            label_cafeToPay.Text = 0.ToString();
+            label_totalToPay.Text = 0.ToString();
+
+            // вспывающие подсказки, строки берем из метода ToolTips
+            toolTip1.SetToolTip(this.comboBox_gasTypes, ToolTips(1));
+            toolTip1.SetToolTip(this.rdB_count, ToolTips(2));
+            toolTip1.SetToolTip(this.rdB_Sum, ToolTips(3));
         }
+
         private double a95plus = 50;       // цена позиции бензина
         private double a95 = 45;           // цена позиции бензина
         private double a92 = 40;           // цена позиции бензина
@@ -26,9 +41,40 @@ namespace WindowsForms_les3
         private double burger_price = 30;  // цена позиции кафе
         private double potato_price = 20;  // цена позиции кафе
         private double cola_price = 10;    // цена позиции кафе
-     
 
-        // 2 раза щелкнули по форме, получили метод
+        // булевая переменная для смены элемента StatusStrip
+        bool flag = true;
+        // обработчик шага (тиканья) таймера, шаг 2 сек
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (flag)  // если flag = true
+            {
+                // то в toolStripStatusLabel1 выводим текущее время
+                toolStripStatusLabel1.Text = DateTime.Now.ToShortTimeString();
+                flag = false;  // и ставим flag = false
+            }
+            else  // если flag = false
+            {
+                // то в toolStripStatusLabel1 выводим текущую дату
+                toolStripStatusLabel1.Text = DateTime.Now.ToShortDateString();
+                flag = true;  // и ставим flag = true
+            }
+        }
+
+        // метод с массивом строк всплывающих подсказок
+        private string ToolTips(int x)
+        {
+            // массив строк подсказок
+            string[] arr =
+            {
+                "Выберите вид бензина",
+                "Если вам нужно определенное кол-во бензина",
+                "Если вам нужно заправится на определенную сумму"
+            };
+            return arr[x-1];  // вернуть нужную подсказку по номару (с 1го)
+        }
+
+        // 2 раза щелкнули по форме, получили обработчик загрузки формы
         private void Form1_Load(object sender, EventArgs e)
         {
             comboBox_gasTypes.SelectedIndex = 0;  // по умолчанию галочка стоит на 0 эл-те пизиции бензина
@@ -60,7 +106,7 @@ namespace WindowsForms_les3
                     textBox_gasPrice.Text = gas.ToString();
                     break;
             }
-            itogo_gas.Text = Rosrahunok_zapravka().ToString("N2");
+            label_gasToPay.Text = Rosrahunok_zapravka().ToString("N2");
         }
 
         private double Rosrahunok_zapravka()  // метод Рассчет цены в Заправке
@@ -109,13 +155,13 @@ namespace WindowsForms_les3
         private void textBox_count_TextChanged(object sender, EventArgs e)
         {
             // в зависимотси от изменения Кол-во в Заправке - меняем Всего цена в заправке
-            itogo_gas.Text = Rosrahunok_zapravka().ToString("N2");          
+            label_gasToPay.Text = Rosrahunok_zapravka().ToString("N2");          
         }
 
         private void textBox_sum_TextChanged(object sender, EventArgs e)
         {
             // в зависимотси от изменения Сумма в Заправке - меняем Всего цена в заправке
-            itogo_gas.Text = Rosrahunok_zapravka().ToString("N2");
+            label_gasToPay.Text = Rosrahunok_zapravka().ToString("N2");
         }
 
         private double Rozrahunok_Cafe()  // метод Рассчет цены в Кафе
@@ -195,32 +241,50 @@ namespace WindowsForms_les3
         private void textBox_cafe1_amount_TextChanged(object sender, EventArgs e)
         {
             // в зависимотси от изменения кол-ва позиции в кафе - меняем Всего цена в кафе
-            textBox_cafeToPay.Text = Rozrahunok_Cafe().ToString("N2");
+            label_cafeToPay.Text = Rozrahunok_Cafe().ToString("N2");
         }
 
         private void textBox_cafe2_amount_TextChanged(object sender, EventArgs e)
         {
             // в зависимотси от изменения кол-ва позиции в кафе - меняем Всего цена в кафе
-            textBox_cafeToPay.Text = Rozrahunok_Cafe().ToString("N2");
+            label_cafeToPay.Text = Rozrahunok_Cafe().ToString("N2");
         }
 
         private void textBox_cafe3_amount_TextChanged(object sender, EventArgs e)
         {
             // в зависимотси от изменения кол-ва позиции в кафе - меняем Всего цена в кафе
-            textBox_cafeToPay.Text = Rozrahunok_Cafe().ToString("N2");
+            label_cafeToPay.Text = Rozrahunok_Cafe().ToString("N2");
         }
 
         private void textBox_cafe4_amount_TextChanged(object sender, EventArgs e)
         {
             // в зависимотси от изменения кол-ва позиции в кафе - меняем Всего цена в кафе
-            textBox_cafeToPay.Text = Rozrahunok_Cafe().ToString("N2");
+            label_cafeToPay.Text = Rozrahunok_Cafe().ToString("N2");
         }
 
         // обработка клика по кнопке Постчитать (полный рассчет)
         private void button_TotalToPay_Click(object sender, EventArgs e)
         {
-            textBox_TotalToPay.Text
+            label_totalToPay.Text
                  = (Rosrahunok_zapravka() + Rozrahunok_Cafe()).ToString("N2");
+        }
+
+        // обработчик события Свернуть форму, сворачиваем в системный трей
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if(FormWindowState.Minimized == WindowState)
+            {
+                Hide();
+                this.notifyIcon1.Visible = true;
+            }
+        }
+
+        // обработчик клика на элемент notifyIcon1 (развернуть форму из системного трея)
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+            this.notifyIcon1.Visible = false;
         }
     }
 }

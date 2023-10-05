@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox_gasStation = new System.Windows.Forms.GroupBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox_gasToPay = new System.Windows.Forms.GroupBox();
             this.label_grn3 = new System.Windows.Forms.Label();
-            this.itogo_gas = new System.Windows.Forms.Label();
+            this.label_gasToPay = new System.Windows.Forms.Label();
             this.label_grn1 = new System.Windows.Forms.Label();
             this.label_gasPrice = new System.Windows.Forms.Label();
             this.textBox_gasPrice = new System.Windows.Forms.TextBox();
@@ -50,8 +50,8 @@
             this.label_CafeCount = new System.Windows.Forms.Label();
             this.label_cafePrice = new System.Windows.Forms.Label();
             this.groupBox_cafeToPay = new System.Windows.Forms.GroupBox();
+            this.label_cafeToPay = new System.Windows.Forms.Label();
             this.label_grn4 = new System.Windows.Forms.Label();
-            this.textBox_cafeToPay = new System.Windows.Forms.TextBox();
             this.textBox_cafe4_amount = new System.Windows.Forms.TextBox();
             this.textBox_cafe3_amount = new System.Windows.Forms.TextBox();
             this.textBox_cafe2_amount = new System.Windows.Forms.TextBox();
@@ -65,10 +65,16 @@
             this.checkBox_burger = new System.Windows.Forms.CheckBox();
             this.checkBox_hotdog = new System.Windows.Forms.CheckBox();
             this.groupBox_Total = new System.Windows.Forms.GroupBox();
-            this.label_grn5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label_totalToPay = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox_TotalToPay = new System.Windows.Forms.TextBox();
             this.button_TotalToPay = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.groupBox_gasStation.SuspendLayout();
             this.groupBox_gasToPay.SuspendLayout();
             this.groupBox_radiobuttons.SuspendLayout();
@@ -76,11 +82,11 @@
             this.groupBox_cafeToPay.SuspendLayout();
             this.groupBox_Total.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox_gasStation
             // 
-            this.groupBox_gasStation.Controls.Add(this.panel1);
             this.groupBox_gasStation.Controls.Add(this.groupBox_gasToPay);
             this.groupBox_gasStation.Controls.Add(this.label_grn1);
             this.groupBox_gasStation.Controls.Add(this.label_gasPrice);
@@ -95,17 +101,10 @@
             this.groupBox_gasStation.TabStop = false;
             this.groupBox_gasStation.Text = "Автозаправка";
             // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(244, 300);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(155, 118);
-            this.panel1.TabIndex = 2;
-            // 
             // groupBox_gasToPay
             // 
             this.groupBox_gasToPay.Controls.Add(this.label_grn3);
-            this.groupBox_gasToPay.Controls.Add(this.itogo_gas);
+            this.groupBox_gasToPay.Controls.Add(this.label_gasToPay);
             this.groupBox_gasToPay.Location = new System.Drawing.Point(12, 202);
             this.groupBox_gasToPay.Name = "groupBox_gasToPay";
             this.groupBox_gasToPay.Size = new System.Drawing.Size(201, 87);
@@ -116,21 +115,21 @@
             // label_grn3
             // 
             this.label_grn3.AutoSize = true;
-            this.label_grn3.Location = new System.Drawing.Point(162, 46);
+            this.label_grn3.Location = new System.Drawing.Point(34, 46);
             this.label_grn3.Name = "label_grn3";
-            this.label_grn3.Size = new System.Drawing.Size(27, 13);
+            this.label_grn3.Size = new System.Drawing.Size(30, 13);
             this.label_grn3.TabIndex = 7;
-            this.label_grn3.Text = "грн.";
+            this.label_grn3.Text = "грн.,";
             // 
-            // itogo_gas
+            // label_gasToPay
             // 
-            this.itogo_gas.AutoSize = true;
-            this.itogo_gas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.itogo_gas.Location = new System.Drawing.Point(70, 38);
-            this.itogo_gas.Name = "itogo_gas";
-            this.itogo_gas.Size = new System.Drawing.Size(94, 24);
-            this.itogo_gas.TabIndex = 0;
-            this.itogo_gas.Text = "gasToPay";
+            this.label_gasToPay.AutoSize = true;
+            this.label_gasToPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_gasToPay.Location = new System.Drawing.Point(70, 38);
+            this.label_gasToPay.Name = "label_gasToPay";
+            this.label_gasToPay.Size = new System.Drawing.Size(71, 24);
+            this.label_gasToPay.TabIndex = 0;
+            this.label_gasToPay.Text = "gasPay";
             // 
             // label_grn1
             // 
@@ -298,8 +297,8 @@
             // 
             // groupBox_cafeToPay
             // 
+            this.groupBox_cafeToPay.Controls.Add(this.label_cafeToPay);
             this.groupBox_cafeToPay.Controls.Add(this.label_grn4);
-            this.groupBox_cafeToPay.Controls.Add(this.textBox_cafeToPay);
             this.groupBox_cafeToPay.Location = new System.Drawing.Point(15, 202);
             this.groupBox_cafeToPay.Name = "groupBox_cafeToPay";
             this.groupBox_cafeToPay.Size = new System.Drawing.Size(193, 87);
@@ -307,22 +306,24 @@
             this.groupBox_cafeToPay.TabStop = false;
             this.groupBox_cafeToPay.Text = "До оплати (кафе)";
             // 
+            // label_cafeToPay
+            // 
+            this.label_cafeToPay.AutoSize = true;
+            this.label_cafeToPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_cafeToPay.Location = new System.Drawing.Point(49, 38);
+            this.label_cafeToPay.Name = "label_cafeToPay";
+            this.label_cafeToPay.Size = new System.Drawing.Size(65, 24);
+            this.label_cafeToPay.TabIndex = 8;
+            this.label_cafeToPay.Text = "cafPay";
+            // 
             // label_grn4
             // 
             this.label_grn4.AutoSize = true;
-            this.label_grn4.Location = new System.Drawing.Point(154, 53);
+            this.label_grn4.Location = new System.Drawing.Point(13, 46);
             this.label_grn4.Name = "label_grn4";
-            this.label_grn4.Size = new System.Drawing.Size(27, 13);
+            this.label_grn4.Size = new System.Drawing.Size(30, 13);
             this.label_grn4.TabIndex = 1;
-            this.label_grn4.Text = "грн.";
-            // 
-            // textBox_cafeToPay
-            // 
-            this.textBox_cafeToPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox_cafeToPay.Location = new System.Drawing.Point(60, 35);
-            this.textBox_cafeToPay.Name = "textBox_cafeToPay";
-            this.textBox_cafeToPay.Size = new System.Drawing.Size(88, 29);
-            this.textBox_cafeToPay.TabIndex = 0;
+            this.label_grn4.Text = "грн.,";
             // 
             // textBox_cafe4_amount
             // 
@@ -442,9 +443,9 @@
             // 
             // groupBox_Total
             // 
-            this.groupBox_Total.Controls.Add(this.label_grn5);
+            this.groupBox_Total.Controls.Add(this.label1);
+            this.groupBox_Total.Controls.Add(this.label_totalToPay);
             this.groupBox_Total.Controls.Add(this.pictureBox1);
-            this.groupBox_Total.Controls.Add(this.textBox_TotalToPay);
             this.groupBox_Total.Controls.Add(this.button_TotalToPay);
             this.groupBox_Total.Location = new System.Drawing.Point(12, 317);
             this.groupBox_Total.Name = "groupBox_Total";
@@ -453,15 +454,24 @@
             this.groupBox_Total.TabStop = false;
             this.groupBox_Total.Text = "ВСЬОГО до оплати";
             // 
-            // label_grn5
+            // label1
             // 
-            this.label_grn5.AutoSize = true;
-            this.label_grn5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_grn5.Location = new System.Drawing.Point(288, 36);
-            this.label_grn5.Name = "label_grn5";
-            this.label_grn5.Size = new System.Drawing.Size(59, 29);
-            this.label_grn5.TabIndex = 3;
-            this.label_grn5.Text = "грн.";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(196, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "грн.,";
+            // 
+            // label_totalToPay
+            // 
+            this.label_totalToPay.AutoSize = true;
+            this.label_totalToPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_totalToPay.Location = new System.Drawing.Point(232, 36);
+            this.label_totalToPay.Name = "label_totalToPay";
+            this.label_totalToPay.Size = new System.Drawing.Size(60, 24);
+            this.label_totalToPay.TabIndex = 9;
+            this.label_totalToPay.Text = "totPay";
             // 
             // pictureBox1
             // 
@@ -472,14 +482,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(41, 38);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
-            // 
-            // textBox_TotalToPay
-            // 
-            this.textBox_TotalToPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox_TotalToPay.Location = new System.Drawing.Point(182, 27);
-            this.textBox_TotalToPay.Name = "textBox_TotalToPay";
-            this.textBox_TotalToPay.Size = new System.Drawing.Size(100, 35);
-            this.textBox_TotalToPay.TabIndex = 1;
             // 
             // button_TotalToPay
             // 
@@ -492,17 +494,52 @@
             this.button_TotalToPay.UseVisualStyleBackColor = true;
             this.button_TotalToPay.Click += new System.EventHandler(this.button_TotalToPay_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 396);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(493, 22);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 2000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 403);
+            this.ClientSize = new System.Drawing.Size(493, 418);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox_Total);
             this.Controls.Add(this.groupBox_Cafe);
             this.Controls.Add(this.groupBox_gasStation);
             this.Name = "Form1";
             this.Text = "BestOil";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.groupBox_gasStation.ResumeLayout(false);
             this.groupBox_gasStation.PerformLayout();
             this.groupBox_gasToPay.ResumeLayout(false);
@@ -516,7 +553,10 @@
             this.groupBox_Total.ResumeLayout(false);
             this.groupBox_Total.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -526,12 +566,11 @@
         private System.Windows.Forms.RadioButton rdB_count;
         private System.Windows.Forms.GroupBox groupBox_radiobuttons;
         private System.Windows.Forms.RadioButton rdB_Sum;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox comboBox_gasTypes;
         private System.Windows.Forms.Label label_gas;
         private System.Windows.Forms.GroupBox groupBox_gasToPay;
         private System.Windows.Forms.Label label_grn3;
-        private System.Windows.Forms.Label itogo_gas;
+        private System.Windows.Forms.Label label_gasToPay;
         private System.Windows.Forms.Label label_grn1;
         private System.Windows.Forms.Label label_gasPrice;
         private System.Windows.Forms.TextBox textBox_gasPrice;
@@ -545,7 +584,6 @@
         private System.Windows.Forms.CheckBox checkBox_potato;
         private System.Windows.Forms.CheckBox checkBox_burger;
         private System.Windows.Forms.GroupBox groupBox_cafeToPay;
-        private System.Windows.Forms.TextBox textBox_cafeToPay;
         private System.Windows.Forms.TextBox textBox_cafe4_amount;
         private System.Windows.Forms.TextBox textBox_cafe3_amount;
         private System.Windows.Forms.TextBox textBox_cafe2_amount;
@@ -555,13 +593,20 @@
         private System.Windows.Forms.TextBox textBox_cafe2_price;
         private System.Windows.Forms.TextBox textBox_cafe1_price;
         private System.Windows.Forms.GroupBox groupBox_Total;
-        private System.Windows.Forms.TextBox textBox_TotalToPay;
         private System.Windows.Forms.Button button_TotalToPay;
         private System.Windows.Forms.Label label_CafeCount;
         private System.Windows.Forms.Label label_cafePrice;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label_grn4;
-        private System.Windows.Forms.Label label_grn5;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label_cafeToPay;
+        private System.Windows.Forms.Label label_totalToPay;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 
